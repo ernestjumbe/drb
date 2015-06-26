@@ -34,7 +34,7 @@ INSTALLED_APPS += (
     'gunicorn',
 )
 
-PREPEND_WWW = True
+PREPEND_WWW = False
 
 WSGI_APPLICATION = 'detrundebord.wsgi.application'
 

@@ -13,6 +13,7 @@ MANAGERS = ADMINS
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
+    '46.101.255.172',
 ]
 
 VAR_ROOT = '/var/www/drb'
@@ -30,7 +31,7 @@ DATABASES = {
 }
 
 INSTALLED_APPS += (
-    #'gunicorn',
+    'gunicorn',
 )
 
 PREPEND_WWW = True

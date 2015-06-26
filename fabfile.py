@@ -9,7 +9,7 @@ from fabric.api import env, run, sudo, put, local
 
 env.use_ssh_config = True
 #env.ssh_config_path = '~/.ssh/config'
-env.hosts = ['detrundebord']
+env.hosts = ['drb']
 env.disable_known_hosts = True
 
 tmp_dir = "/opt/drbenv/tmp"
@@ -120,9 +120,8 @@ def deploy():
 		sudo('unzip latest.zip')
 		sudo('rm latest.zip')
 
-	with cd('/var/www/drb'):
-		sudo('mkdir -p static')
-		sudo('mkdir -p media')
+	sudo('mkdir -p /var/www/drb/static')
+	sudo('mkdir -p /var/www/drb/media')
 
 	_install_deps()
 	_migrate()

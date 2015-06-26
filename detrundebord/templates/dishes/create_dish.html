@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+	<h1>Create new dish</h1>
+
+<form action="#">
+	{% csrf_token %}
+	{% crispy form %}
+	{% for form in ingredient_form %}
+		{{ form.id }}
+
+		<div class="ingredient_form">
+			{% crispy form helper %}
+			{% if form.instance.pk %}
+				{{ form.DELETE }}
+			{% endif %}
+		</div>
+	{% endfor %}
+	{{ ingredient_form.management_form }}
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock content %}

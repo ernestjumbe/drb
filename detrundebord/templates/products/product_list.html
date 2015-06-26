@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Products</h1>
+	<table class="table table-bordered">
+		<thead>
+			<th>Lot Number</th>
+			<th>Name</th>
+			<th>Recieved</th>
+			<th>Production Date</th>
+			<th>Expiry Date</th>
+			<th>Weight</th>
+			<th>Status</th>
+			<th>Preseve</th>
+		</thead>
+		<tbody>
+			{% for p in products %}
+				<tr>
+					<th scope="row"><a href="{{ p.get_absolute_url }}">{{ p.id }}</a></th>
+					<td><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></td>
+					<td>{{ p.date_recieved }}</td>
+					<td>{{ p.production_date }}</td>
+					<td>{{ p.expiry_date }}</td>
+					<td>{{ p.weight }}</td>
+					<td>{{ p.get_status_display }}</td>
+					<td>{{ p.get_preserve_display }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if is_paginated %}
+	<ul class="pagination pagination-sm">
+		{% if page_obj.has_previous %}
+		<li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+		{% endif %}
+		{% for i in page_obj.paginator.page_range %}
+		
+		<li {% ifequal i page_obj.number %}class="active"{% endifequal %}>
+			<a href="?page={{i}}">
+			{{i}}
+			</a>
+		</li>
+		
+		{% endfor %}
+		
+		{% if page_obj.has_next %}
+		<li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+		{% endif %}
+	</ul>
+	{% endif %}
+{% endblock content %}

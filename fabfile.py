@@ -149,12 +149,10 @@ def pdeploy():
 
 def cleanup():
 	sudo('rm -rf /opt/drbenv/detrundebord/')
-	#sudo('rm -rf /opt/fooplaapienv/')
+	sudo('rm -rf /opt/drbenv/')
 	sudo('rm -rf /etc/supervisor/conf.d/gunicorn.conf')
 	sudo('rm -rf /opt/drbenv/gunicorn_config.py')
 	_rmTemp()
-
-	return line
 
 def remote_uname():
 	sudo('uname -a')

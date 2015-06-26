@@ -5,7 +5,7 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 ADMINS = (
-    #('You', 'your@mail'),
+    ('Ernest', 'e2jeyy@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -15,18 +15,17 @@ MANAGERS = ADMINS
 ALLOWED_HOSTS = [
 ]
 
-VAR_ROOT = '/var/www/detrundebord'
+VAR_ROOT = '/var/www/drb'
 MEDIA_ROOT = os.path.join(VAR_ROOT, 'media')
 STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'detrundebord',
+        'USER': 'detrundebord',
+        'PASSWORD': 'detrundebord123',
         'HOST': 'localhost',
-        'PORT': '',
     }
 }
 
@@ -41,3 +40,11 @@ WSGI_APPLICATION = 'detrundebord.wsgi.application'
 LOGGING = {
     'version': 1,
 }
+
+DEFAULT_FROM_EMAIL = 'no-reply@foopla.dk'
+
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.crystone.se' 
+EMAIL_HOST_USER = 'no-reply@foopla.dk'  # this is my email address, use yours
+EMAIL_HOST_PASSWORD = 'community123'   # set environ yourself
+EMAIL_PORT = 587

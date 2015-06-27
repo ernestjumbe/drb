@@ -3,6 +3,7 @@ from .models import Product
 
 class ProductAdmin(admin.ModelAdmin):
 	#Remember to add Lot number
+	#Add expiy date.
 	list_display = ('id', 'name',  'qty', 'i_type', 'current_weight', 'status', 'product_type', 'preserve', 'position')
 	list_display_links = ('name',)
 	readonly_fields=('current_weight', 'initial_weight')

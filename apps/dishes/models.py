@@ -22,7 +22,7 @@ class Dish(TimeStampedModel):
 
 @python_2_unicode_compatible
 class Ingredient(TimeStampedModel):
-	name = models.CharField(_('name'), max_length=100)
+	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
 	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'))
 	dish = models.ForeignKey(Dish)
@@ -40,6 +40,7 @@ class Ingredient(TimeStampedModel):
 			p = Product.objects.get(pk=self.product.pk)
 			p.current_weight = p.current_weight - self.weight_used
 			p.save()
+			self.name = p.name
 		else:
 			p = Product.objects.get(pk=self.product.pk)
 			p.current_weight = p.current_weight + (self.og_weight_used - self.weight_used)

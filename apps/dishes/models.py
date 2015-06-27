@@ -24,9 +24,20 @@ class Dish(TimeStampedModel):
 class Ingredient(TimeStampedModel):
 	name = models.CharField(_('name'), max_length=100)
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
-	weight_user = models.IntegerField(_('weight used'), blank=True, null=True)
+	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'))
 	dish = models.ForeignKey(Dish)
 	product = models.ForeignKey(Product, limit_choices_to={'product_type': 1})
 
 	def __str__(self):
 		return self.name
+
+	def __init__(self, *args, **kwargs):
+		super(Ingredient, self).__init__(*args, **kwargs)
+		self.og_weight_user = self.weight_user
+
+	def save(self, *args, **kwargs):
+		if self.pk is None:
+			p = Product.objects.get(pk=self.product.pk)
+			p.current_weight = p.current_weight - self.weight_user
+			p.save()
+		super(Ingredient, self).save()

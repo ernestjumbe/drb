@@ -65,7 +65,7 @@ class Product(TimeStampedModel):
 	qty = models.IntegerField('Antal', blank=True, null=True)
 	i_type = models.CharField('Enhed', max_length=50)
 	name = models.CharField('Produkt', max_length=100)
-	weight_per_item = models.DecimalField('Vaegt pr. enhed', max_digits=5, decimal_places=2)
+	weight_per_item = models.DecimalField('Vaegt pr. enhed (i kg)', max_digits=5, decimal_places=2)
 	#lot_number = models.CharField(_('lot number'), max_length=50)
 	description = models.TextField(_('description'), null=True, blank=True)
 	production_date = models.DateField(_('production date'), blank=True, null=True)

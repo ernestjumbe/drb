@@ -65,7 +65,7 @@ class Product(TimeStampedModel):
 	name = models.CharField(_('name of product'), max_length=100)
 	#lot_number = models.CharField(_('lot number'), max_length=50)
 	description = models.TextField(_('description'), null=True, blank=True)
-	production_date = models.DateField(_('production date'), default=datetime.date.today)
+	production_date = models.DateField(_('production date'), blank=True, null=True)
 	expiry_date = models.DateField(_('expiry date'))
 	date_received = models.DateField(_('date received'), default=datetime.date.today)
 	initial_weight = models.DecimalField(_('initial weight'), max_digits=5, decimal_places=2)

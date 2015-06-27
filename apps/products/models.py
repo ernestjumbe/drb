@@ -32,6 +32,34 @@ PRESERVE_CHOICES = (
 	(PRESERVE_SHELF, _('Shelf')),
 )
 
+NULL = 0
+KOLERUM_2 = 1
+KOLERUM_3 = 2
+KOLE_CONTAINER_4 = 3
+KOLE_CONTAINER_5 = 4
+FRYSE_CONTAINER_6 = 5
+FRYSE_CONTAINER_7 = 6
+ZONE_CONTAINER_1 = 7
+ZONE_CONTAINER_2 = 8
+ZONE_CONTAINER_3 = 9
+ZONE_CONTAINER_4 = 10
+ZONE_CONTAINER_5 = 11
+
+POSITION_CHOICES = (
+	(NULL, '--------'),
+	(KOLERUM_2, u'Kolerum 2'),
+	(KOLERUM_3, u'Kolerum 3'),
+	(KOLE_CONTAINER_4, u'Kole Container 4'),
+	(KOLE_CONTAINER_5, u'Kole Container 5'),
+	(FRYSE_CONTAINER_6, 'Fryse Container 6'),
+	(FRYSE_CONTAINER_7, 'Fryse Container 7'),
+	(ZONE_CONTAINER_1, 'Zone Container 1'),
+	(ZONE_CONTAINER_2, 'Zone Container 2'),
+	(ZONE_CONTAINER_3, 'Zone Container 3'),
+	(ZONE_CONTAINER_4, 'Zone Container 4'),
+	(ZONE_CONTAINER_5, 'Zone Container 5'),
+)
+
 @python_2_unicode_compatible
 class Product(TimeStampedModel):
 	name = models.CharField(_('name of product'), max_length=100)
@@ -40,12 +68,12 @@ class Product(TimeStampedModel):
 	production_date = models.DateField(_('production date'), default=datetime.date.today)
 	expiry_date = models.DateField(_('expiry date'))
 	date_received = models.DateField(_('date received'), default=datetime.date.today)
-	#weight = models.IntegerField(_('weight of package'), help_text=_('Weight in grams'))
 	initial_weight = models.DecimalField(_('initial weight'), max_digits=5, decimal_places=2)
 	current_weight = models.DecimalField(_('current weight'), max_digits=5, decimal_places=2, blank=True)
 	status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1, help_text=_('What is the current status?'))
 	product_type = models.IntegerField(_('product type'), choices=TYPE_CHOICES, default=1)
-	preserve = models.IntegerField(_('preserve'), choices=PRESERVE_CHOICES, help_text=('How should this be preserved?'))
+	preserve = models.IntegerField(_('preserve'), choices=PRESERVE_CHOICES, help_text=_('How should this be preserved?'))
+	position = models.IntegerField(_('position'), choices=POSITION_CHOICES, help_text=_('Where has this been stored?'), default=0)
 	store = models.ForeignKey(Store)
 
 	def __str__(self):

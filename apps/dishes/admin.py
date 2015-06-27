@@ -5,6 +5,7 @@ class IngredientInline(admin.TabularInline):
 	model = Ingredient
 	raw_id_fields = ("product",)
 	extra = 1
+	classes = ('collapse open',)
 
 class DishAdmin(admin.ModelAdmin):
 	inlines = [IngredientInline,]

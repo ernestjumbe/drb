@@ -52,7 +52,7 @@ class Store(TimeStampedModel):
 	contact_lname = models.CharField(_('Contact Last name'), max_length=254)
 	company_name = models.CharField(_('Company name'), max_length=254)
 	company_adress = models.CharField(_('company address'), max_length=50)
-	company_postcode = models.IntegerField(_('company postcode'))
+	company_postcode = models.CharField(_('company postcode'), max_length=11)
 	company_town = models.CharField(_('company town'), max_length=50)
 	company_country = models.CharField(_('company country'), max_length=254, default='Danmark')
 	camp = models.CharField(_('camp'), max_length=100)

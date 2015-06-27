@@ -42,7 +42,7 @@ class Product(TimeStampedModel):
 	production_date = models.DateField(_('production date'), default=datetime.date.today)
 	expiry_date = models.DateField(_('expiry date'))
 	date_received = models.DateField(_('date received'), default=datetime.date.today)
-	weight = models.IntegerField(_('weight of package'), help_text=_('Weight in grams'))
+	#weight = models.IntegerField(_('weight of package'), help_text=_('Weight in grams'))
 	status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1, help_text=_('What is the current status?'))
 	product_type = models.IntegerField(_('product type'), choices=TYPE_CHOICES, default=1)
 	preserve = models.IntegerField(_('preserve'), choices=PRESERVE_CHOICES, help_text=('How should this be preserved?'))

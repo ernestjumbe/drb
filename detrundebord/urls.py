@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name="index.html"), {}, name='index'),
     url(r'^products/', include('products.urls')),
     url(r'^dishes/', include('dishes.urls')),
+    url(r'^stores/', include('stores.urls')),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     (r'^accounts/', include('registration.backends.default.urls')),

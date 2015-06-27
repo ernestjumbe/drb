@@ -6,14 +6,12 @@ from core.models import TimeStampedModel
 from stores.models import Store
 
 
-STATUS_RECEIVED = 1
-STATUS_ONWAY = 2
-STATUS_DEVILERED = 3
+STATUS_COLLECTED = 1
+STATUS_READY_FOR_USE = 2
 
 STATUS_CHOICES = (
-	(STATUS_RECEIVED, _('Received')),
-	(STATUS_ONWAY, _('Picked Up')),
-	(STATUS_DEVILERED, _('Delivered')),
+	(STATUS_COLLECTED, _('Collected')),
+	(STATUS_READY_FOR_USE, _('Ready for use')),
 )
 
 TYPE_INGREDIENT = 1

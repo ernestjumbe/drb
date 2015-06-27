@@ -9,7 +9,7 @@ from teams.models import Team
 # 
 @python_2_unicode_compatible
 class Dish(TimeStampedModel):
-	name = models.CharField(_('name'), max_length=100)
+	name = models.CharField(_('name dish'), max_length=100)
 	# lot_number = models.CharField(_('lot number'), max_length=50)
 	team = models.ForeignKey(Team)
 

@@ -71,6 +71,10 @@ def _install_gunicorn():
 	with cd('/opt/drbenv/detrundebord'), prefix(venv):
 		sudo("pip install gunicorn")
 
+def _install_gunicorn():
+	with cd('/opt/drbenv/detrundebord'), prefix(venv):
+		sudo("newrelic-admin generate-config 88ce58872e03a1ac6836805effa976883133ee4a newrelic.ini")
+
 def _collectstatic():
 	_djangoManage("collectstatic --noinput")
 

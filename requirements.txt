@@ -15,6 +15,7 @@ paramiko==1.15.2
 phonenumbers==7.0.6
 psycopg2==2.6.1
 pycrypto==2.6.1
+raven==5.3.1
 six==1.9.0
 sqlparse==0.1.15
 unicodecsv==0.13.0

@@ -32,7 +32,12 @@ DATABASES = {
 
 INSTALLED_APPS += (
     'gunicorn',
+    'raven.contrib.django.raven_compat',
 )
+
+RAVEN_CONFIG = {
+    'dsn': 'https://9c561277d4a54378989e6bd7f860022d:7d50e2f9905d4be0a5605f1d62f8b7ad@app.getsentry.com/46863',
+}
 
 PREPEND_WWW = False
 

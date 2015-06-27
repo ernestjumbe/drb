@@ -71,7 +71,7 @@ class Product(TimeStampedModel):
 	production_date = models.DateField(_('production date'), blank=True, null=True)
 	expiry_date = models.DateField(_('expiry date'))
 	date_received = models.DateField(_('date received'), default=datetime.date.today)
-	initial_weight = models.DecimalField(_('initial weight'), max_digits=5, decimal_places=2, blank=True, null=True)
+	initial_weight = models.DecimalField(_('initial weight'), max_digits=5, decimal_places=2, blank=True, null=True, editable=False)
 	current_weight = models.DecimalField(_('current weight'), max_digits=5, decimal_places=2, blank=True, editable=False)
 	status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1, help_text=_('What is the current status?'))
 	product_type = models.IntegerField(_('product type'), choices=TYPE_CHOICES, default=1)
@@ -91,6 +91,7 @@ class Product(TimeStampedModel):
 		self.og_initial_weight = self.initial_weight
 
 	def save(self, *args, **kwargs):
+		self.initial_weight = self.qty*self.weight_per_item
 		if self.pk is None:
 			self.current_weight = self.initial_weight
 		else:

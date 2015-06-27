@@ -62,15 +62,17 @@ POSITION_CHOICES = (
 
 @python_2_unicode_compatible
 class Product(TimeStampedModel):
-	name = models.CharField(_('name of product'), max_length=100)
+	qty = models.IntegerField('Antal', blank=True, null=True)
+	i_type = models.CharField('Enhed', max_length=50)
+	name = models.CharField('Produkt', max_length=100)
+	weight_per_item = models.DecimalField('Vaegt pr. enhed', max_digits=5, decimal_places=2)
 	#lot_number = models.CharField(_('lot number'), max_length=50)
 	description = models.TextField(_('description'), null=True, blank=True)
 	production_date = models.DateField(_('production date'), blank=True, null=True)
 	expiry_date = models.DateField(_('expiry date'))
 	date_received = models.DateField(_('date received'), default=datetime.date.today)
-	initial_weight = models.DecimalField(_('initial weight'), max_digits=5, decimal_places=2)
+	initial_weight = models.DecimalField(_('initial weight'), max_digits=5, decimal_places=2, blank=True, null=True)
 	current_weight = models.DecimalField(_('current weight'), max_digits=5, decimal_places=2, blank=True, editable=False)
-	qty = models.IntegerField(_('Quantity'), blank=True, null=True)
 	status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1, help_text=_('What is the current status?'))
 	product_type = models.IntegerField(_('product type'), choices=TYPE_CHOICES, default=1)
 	preserve = models.IntegerField(_('preserve'), choices=PRESERVE_CHOICES, help_text=_('How should this be preserved?'))

@@ -46,7 +46,7 @@ CAMP_CHOICES = (
 class Store(TimeStampedModel):
 	list_number = models.CharField(_('list number'), max_length=50)
 	name = models.CharField(_('name'), max_length=254)
-	phone_number = PhoneNumberField(_('phone number'))
+	phone_number = PhoneNumberField(_('phone number'), blank=True, null=True)
 	contact_email = models.EmailField(_('email'), max_length=254)
 	contact_fname = models.CharField(_('Contact First name'), max_length=254)
 	contact_lname = models.CharField(_('Contact Last name'), max_length=254)

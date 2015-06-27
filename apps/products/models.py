@@ -39,11 +39,10 @@ KOLE_CONTAINER_4 = 3
 KOLE_CONTAINER_5 = 4
 FRYSE_CONTAINER_6 = 5
 FRYSE_CONTAINER_7 = 6
-ZONE_CONTAINER_1 = 7
-ZONE_CONTAINER_2 = 8
-ZONE_CONTAINER_3 = 9
-ZONE_CONTAINER_4 = 10
-ZONE_CONTAINER_5 = 11
+CITY_CENTER_EAST = 7
+APPOLO_SYD = 8
+TRANSIT = 9
+
 
 POSITION_CHOICES = (
 	(NULL, '--------'),
@@ -53,11 +52,9 @@ POSITION_CHOICES = (
 	(KOLE_CONTAINER_5, u'Kole Container 5'),
 	(FRYSE_CONTAINER_6, 'Fryse Container 6'),
 	(FRYSE_CONTAINER_7, 'Fryse Container 7'),
-	(ZONE_CONTAINER_1, 'Zone Container 1'),
-	(ZONE_CONTAINER_2, 'Zone Container 2'),
-	(ZONE_CONTAINER_3, 'Zone Container 3'),
-	(ZONE_CONTAINER_4, 'Zone Container 4'),
-	(ZONE_CONTAINER_5, 'Zone Container 5'),
+	(CITY_CENTER_EAST, 'City Center East'),
+	(APPOLO_SYD, 'Applo Syd'),
+	(TRANSIT, 'Transit'),
 )
 
 @python_2_unicode_compatible

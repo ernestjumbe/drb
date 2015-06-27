@@ -35,7 +35,7 @@ PRESERVE_CHOICES = (
 @python_2_unicode_compatible
 class Product(TimeStampedModel):
 	name = models.CharField(_('name of product'), max_length=100)
-	lot_number = models.CharField(_('lot number'), max_length=50)
+	#lot_number = models.CharField(_('lot number'), max_length=50)
 	description = models.TextField(_('description'), null=True, blank=True)
 	production_date = models.DateField(_('production date'), default=datetime.date.today)
 	expiry_date = models.DateField(_('expiry date'))

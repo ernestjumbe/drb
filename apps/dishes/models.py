@@ -12,6 +12,8 @@ class Dish(TimeStampedModel):
 	name = models.CharField(_('name dish'), max_length=100)
 	# lot_number = models.CharField(_('lot number'), max_length=50)
 	team = models.ForeignKey(Team)
+	start = models.DateTimeField(_('start time'))
+	ex_finish = models.DateTimeField(_('Expected finish time'))
 
 	def __str__(self):
 		return self.name

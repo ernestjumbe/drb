@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from core.models import TimeStampedModel
 from products.models import Product
 from teams.models import Team
+from django.contrib.auth.models import User
 
 # Create your models here.
 # 
@@ -14,6 +15,11 @@ class Dish(TimeStampedModel):
 	team = models.ForeignKey(Team)
 	start = models.DateTimeField(_('start time'))
 	ex_finish = models.DateTimeField(_('Expected finish time'))
+	created_by = models.ForeignKey(User)
+
+	class Meta:
+		verbose_name='dish'
+		verbose_name_plural='dishes'
 
 	def __str__(self):
 		return self.name

@@ -5,6 +5,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from core.models import TimeStampedModel
 from stores.models import Store
+from django.contrib.auth.models import User
 
 
 STATUS_COLLECTED = 1
@@ -95,6 +96,7 @@ class Product(TimeStampedModel):
 	preserve = models.IntegerField(_('preserve'), choices=PRESERVE_CHOICES, help_text=_('How should this be preserved?'))
 	position = models.IntegerField(_('position'), choices=POSITION_CHOICES, help_text=_('Where has this been stored?'), default=0)
 	store = models.ForeignKey(Store)
+	created_by = models.ForeignKey(User)
 
 	def __str__(self):
 		return self.name

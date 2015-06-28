@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'teams',
     'dishes',
     'rest_framework',
+    'core'
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,17 +1,24 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.forms.util import ValidationError
 from crispy_forms.helper import FormHelper, Layout
 from .models import Dish
 from .forms import DishForm, IngrdientFormset
 
-class DishListView(ListView):
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
+
+class DishListView(LoginRequiredMixin, ListView):
 	model = Dish
 	context_object_name = 'dishes'
 	template_name = 'dishes/dish_list.html'
 
-class DishDetailView(DetailView):
+class DishDetailView(LoginRequiredMixin, DetailView):
 	model = Dish
 	context_object_name = 'dish'
 	pk_url_kwarg = 'pk'
@@ -25,7 +32,7 @@ class IngredientFormSetHelper(FormHelper):
 		self.layout = Layout('form_ingredient')
 		self.render_required_fields = True
 
-class DishCreateView(CreateView):
+class DishCreateView(LoginRequiredMixin, CreateView):
 	model = Dish
 	form_class = DishForm
 	template_name = 'dishes/create_dish.html'

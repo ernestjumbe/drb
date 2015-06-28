@@ -2,7 +2,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
+from core.forms import LoginForm
 from django.contrib import admin
+
+from core.views import signin, signout
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,6 +17,16 @@ urlpatterns = patterns('',
     url(r'^dishes/', include('dishes.urls')),
     url(r'^stores/', include('stores.urls')),
 
+    url(r'^login/$',
+           signin,
+           {
+               'form_class': LoginForm
+           },
+           name='signin'
+    ),
+    url(r'^disabled/$', TemplateView.as_view(template_name="disabled.html"), {}, name='user_disabled'),
+    url(r'^logout/$',
+           signout, name='signout'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^grappelli/', include('grappelli.urls')),

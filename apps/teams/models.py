@@ -7,5 +7,9 @@ from core.models import TimeStampedModel
 class Team(TimeStampedModel):
 	name = models.CharField(_('name'), max_length=50)
 
+	class Meta:
+		verbose_name='team leader'
+		verbose_name_plural='team leaders'
+
 	def __str__(self):
 		return self.name

@@ -58,9 +58,9 @@ class Store(TimeStampedModel):
 	company_country = models.CharField(_('company country'), max_length=254, default='Danmark')
 	camp = models.CharField(_('camp'), max_length=100)
 	inner_camp = models.CharField(_('inner camp'), max_length=1)
-	other_drinks = models.TextField(_('other drinks'))
-	taxable_drinks = models.TextField(_('taxable drinks'))
-	assortment = models.TextField(_('assortment'))
+	other_drinks = models.TextField(_('other drinks'), blank=True, null=True)
+	taxable_drinks = models.TextField(_('taxable drinks'), blank=True, null=True)
+	assortment = models.TextField(_('assortment'), blank=True, null=True)
 	objects = StoreManager()
 
 	class Meta:

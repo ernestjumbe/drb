@@ -8,10 +8,10 @@ from .models import Dish
 from .forms import DishForm, IngrdientFormset
 
 class LoginRequiredMixin(object):
-    @classmethod
-    def as_view(cls, **initkwargs):
-        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
-        return login_required(view)
+	@classmethod
+	def as_view(cls, **initkwargs):
+		view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+		return login_required(view)
 
 class DishListView(LoginRequiredMixin, ListView):
 	model = Dish

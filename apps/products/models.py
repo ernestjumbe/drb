@@ -67,11 +67,18 @@ def create_lot_number():
 	ran_num = random.randint(0,9999)
 	ran_num = str(ran_num).zfill(4)
 	seq = ("X", ran_num, str(get_year()))
-	print sep.join(seq)
+	lot = sep.join(seq)
+	if not Product.objects.filter(lotnumber=lot).exists():
+		print "Lot number exists"
+		return lot
+	else:
+		print lot
+		create_lot_number()
+
 
 @python_2_unicode_compatible
 class Product(TimeStampedModel):
-	#lot_number = models.CharField(_('Lot number'), max_length=8, editable=False, unique=True, blank=True)
+	lotnumber = models.CharField(_('Lot number'), max_length=9, editable=False, blank=True, null=True)
 	qty = models.IntegerField('Antal')
 	i_type = models.CharField('Enhed', max_length=50)
 	name = models.CharField('Produkt', max_length=100)
@@ -104,8 +111,12 @@ class Product(TimeStampedModel):
 		self.initial_weight = self.qty*self.weight_per_item
 		if self.pk is None:
 			self.current_weight = self.initial_weight
+			#lotnumber = create_lot_number()
+
+			#print create_lot_number()
+			self.lotnumber = create_lot_number()
 		else:
 			self.current_weight = self.current_weight + (self.initial_weight - self.og_initial_weight)
-			create_lot_number()
+			
 		super(Product, self).save()
 

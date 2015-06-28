@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import render
-from .models import Product 
-
+from django.core.urlresolvers import reverse
+from .models import Product
+from .forms import ProductForm
 
 class ProductListView(ListView):
 	#model = Product
@@ -14,8 +15,12 @@ class ProductListView(ListView):
 
 class ProductCreateView(CreateView):
 	model = Product
-	fields = ['name', 'production_date', 'expiry_date', 'weight', 'status', 'preserve', 'source']
+	form_class = ProductForm
 	template_name = "products/create_product.html"
+	#success_url = reverse('product_list')
+	
+	def get_success_url(self):
+		return reverse('product_list')
 
 class ProductDetailView(DetailView):
 	model = Product

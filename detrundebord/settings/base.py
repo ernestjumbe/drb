@@ -44,9 +44,9 @@ LANGUAGES = (
     ('en', 'English'),
 )
 
-DATE_FORMAT = 'd B Y'
+DATE_FORMAT = 'd F Y'
 
-DATETIME_FORMAT = 'd B Y H:M'
+DATETIME_FORMAT = 'd F Y H:i'
 
 
 # Application definition

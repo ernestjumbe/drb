@@ -4,7 +4,7 @@
 	<h1>{{ product.pk }}</h1>
 	<p><strong>Name:</strong> {{ product.name }}</p>
 	<p><strong>Description:</strong><br />{{ product.description }}</p>
-	<p><strong>Date recieved:</strong>  <br> <strong>Production date:</strong> {{ product.production_date }} <br> <strong>Expiry date:</strong> </p>
+	<p><strong>Date recieved:</strong>  <br> <strong>Production date:</strong> {{ product.production_date }} <br> <strong>Expiry date:</strong>{{ product.expiry_date }} </p>
 	<p><strong>Preserve:</strong> {{ product.get_preserve_display }}</p>
 	<p><strong>Status:</strong> {{ product.get_status_display }}</p>
 	<p><strong>Weight:</strong> {{ product.weight }} kg</p>

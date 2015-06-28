@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>Products</h1>
+	<div class="row">
+		<div class="col-xs-6">
+			<h1>Products</h1>
+		</div>
+		<div class="col-xs-6">
+			<a href="{% url 'create_product' %}" class="btn btn-primary pull-right" role="button">Add Product</a>
+		</div>
+	</div>
 	<table class="table table-bordered">
 		<thead>
 			<th>Lot Number</th>
@@ -18,10 +25,10 @@
 				<tr>
 					<th scope="row"><a href="{{ p.get_absolute_url }}">{{ p.id }}</a></th>
 					<td><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></td>
-					<td>{{ p.date_recieved }}</td>
+					<td>{{ p.date_received }}</td>
 					<td>{{ p.production_date }}</td>
-					<td></td>
-					<td>{{ p.weight }}</td>
+					<td>{{ p.expiry_date }}</td>
+					<td>{{ p.current_weight }}</td>
 					<td>{{ p.get_status_display }}</td>
 					<td>{{ p.get_preserve_display }}</td>
 				</tr>

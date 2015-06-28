@@ -9,19 +9,19 @@ from django.contrib.auth.models import User
 
 
 STATUS_COLLECTED = 1
-STATUS_READY_FOR_USE = 2
+STATUS_IN_HOUSE = 2
 
 STATUS_CHOICES = (
 	(STATUS_COLLECTED, _('Collected')),
-	(STATUS_READY_FOR_USE, _('Ready for use')),
+	(STATUS_IN_HOUSE, _('In House')),
 )
 
 TYPE_INGREDIENT = 1
-TYPE_DISH = 2
+TYPE_READY_TO_EAT = 2
 
 TYPE_CHOICES = (
 	(TYPE_INGREDIENT, _('Ingredient')),
-	(TYPE_DISH, _('Dish')),
+	(TYPE_READY_TO_EAT, _('Ready to eat')),
 )
 
 PRESERVE_REFRIGERATED = 1
@@ -42,8 +42,9 @@ KOLE_CONTAINER_5 = 4
 FRYSE_CONTAINER_6 = 5
 FRYSE_CONTAINER_7 = 6
 CITY_CENTER_EAST = 7
-APPOLO_SYD = 8
+APOLLO_SYD = 8
 TRANSIT = 9
+SHELF = 10
 
 
 POSITION_CHOICES = (
@@ -55,8 +56,9 @@ POSITION_CHOICES = (
 	(FRYSE_CONTAINER_6, 'Fryse Container 6'),
 	(FRYSE_CONTAINER_7, 'Fryse Container 7'),
 	(CITY_CENTER_EAST, 'City Center East'),
-	(APPOLO_SYD, 'Applo Syd'),
+	(APOLLO_SYD, 'Apollo Syd'),
 	(TRANSIT, 'Transit'),
+	(SHELF, 'Shelf')
 )
 
 def get_year():

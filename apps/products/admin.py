@@ -7,7 +7,7 @@ class ProductAdmin(admin.ModelAdmin):
 	list_display = ('lotnumber', 'name',  'qty', 'i_type', 'current_weight', 'status', 'product_type', 'preserve', 'position', 'expiry_date')
 	list_display_links = ('name',)
 	readonly_fields=('current_weight', 'initial_weight', 'created', 'modified')
-	fields = (('qty', 'i_type', 'name', 'weight_per_item'), ('store', 'initial_weight', 'current_weight'), ('production_date', 'date_received', 'expiry_date'), ('status', 'preserve', 'position'), 'description', ('created', 'modified'), 'created_by')
+	fields = (('qty', 'i_type', 'name', 'weight_per_item'), ('store', 'initial_weight', 'current_weight'), ('production_date', 'date_received', 'expiry_date'), ('status', 'product_type', 'preserve', 'position'), 'description', ('created', 'modified'), 'created_by')
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		if db_field.name == 'created_by':

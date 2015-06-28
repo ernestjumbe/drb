@@ -68,7 +68,7 @@ class Store(TimeStampedModel):
 
 
 	def __str__(self):
-		return self.name
+		return ('%s - %s, %s' % (self.name, self.camp, self.inner_camp))
 
 	@models.permalink
 	def get_absolute_url(self):

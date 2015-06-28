@@ -57,7 +57,7 @@ class ProductForm(forms.ModelForm):
 	    	Fieldset(
 	    		'',
 	    		'status',
-	    		'postition',
+	    		'position',
 	    		'description'
 	    	),
 	    	ButtonHolder(

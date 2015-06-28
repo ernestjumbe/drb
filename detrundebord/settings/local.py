@@ -1,6 +1,7 @@
 from detrundebord.settings.base import * 
 DEBUG = True
 TEMPLATE_DEBUG = True
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 database_dir = os.path.join(BASE_DIR, 'databases')
 

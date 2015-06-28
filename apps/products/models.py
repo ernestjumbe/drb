@@ -1,4 +1,5 @@
 import datetime
+import random
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -58,12 +59,20 @@ POSITION_CHOICES = (
 )
 
 def get_year():
-	year = datetime.now().strftime('%y')
+	year = datetime.datetime.now().strftime('%y')
 	return year
+
+def create_lot_number():
+	sep = "-"
+	ran_num = random.randint(0,9999)
+	ran_num = str(ran_num).zfill(4)
+	seq = ("X", ran_num, str(get_year()))
+	print sep.join(seq)
 
 @python_2_unicode_compatible
 class Product(TimeStampedModel):
-	qty = models.IntegerField('Antal', blank=True, null=True)
+	#lot_number = models.CharField(_('Lot number'), max_length=8, editable=False, unique=True, blank=True)
+	qty = models.IntegerField('Antal')
 	i_type = models.CharField('Enhed', max_length=50)
 	name = models.CharField('Produkt', max_length=100)
 	weight_per_item = models.DecimalField('Vaegt pr. enhed (i kg)', max_digits=5, decimal_places=2)
@@ -97,5 +106,6 @@ class Product(TimeStampedModel):
 			self.current_weight = self.initial_weight
 		else:
 			self.current_weight = self.current_weight + (self.initial_weight - self.og_initial_weight)
+			create_lot_number()
 		super(Product, self).save()
 

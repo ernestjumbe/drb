@@ -14,7 +14,9 @@ MONTHS_CHOICES = {
 class ProductForm(forms.ModelForm):
 	class Meta:
 		model = Product
-		fields = '__all__'
+		fields = ('qty', 'i_type', 'name', 'weight_per_item', 'description',
+			      'production_date', 'expiry_date', 'date_received', 'status',
+			      'position', 'product_type', 'store', 'preserve')
 		widgets = {
 		    'production_date': SelectDateWidget(
 		    	months = MONTHS_CHOICES,
@@ -57,6 +59,7 @@ class ProductForm(forms.ModelForm):
 	    	Fieldset(
 	    		'',
 	    		'status',
+	    		'preserve',
 	    		'position',
 	    		'product_type',
 	    		'description'

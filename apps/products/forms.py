@@ -58,6 +58,7 @@ class ProductForm(forms.ModelForm):
 	    		'',
 	    		'status',
 	    		'position',
+	    		'product_type',
 	    		'description'
 	    	),
 	    	ButtonHolder(

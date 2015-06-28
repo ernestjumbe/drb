@@ -57,6 +57,10 @@ POSITION_CHOICES = (
 	(TRANSIT, 'Transit'),
 )
 
+def get_year():
+	year = datetime.now().strftime('%y')
+	return year
+
 @python_2_unicode_compatible
 class Product(TimeStampedModel):
 	qty = models.IntegerField('Antal', blank=True, null=True)

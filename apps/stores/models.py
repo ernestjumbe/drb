@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from phonenumber_field.modelfields import PhoneNumberField
 from core.models import TimeStampedModel
+from .managers import StoreManager
 
 CAMP_BERENDSEN = 1
 CAMP_CAMPING_EAST_AGORA_H = 2
@@ -60,6 +61,10 @@ class Store(TimeStampedModel):
 	other_drinks = models.TextField(_('other drinks'))
 	taxable_drinks = models.TextField(_('taxable drinks'))
 	assortment = models.TextField(_('assortment'))
+	objects = StoreManager()
+
+	class Meta:
+		ordering =['name']
 
 
 	def __str__(self):

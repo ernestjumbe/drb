@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from core.models import TimeStampedModel
@@ -6,15 +7,40 @@ from products.models import Product
 from teams.models import Team
 from django.contrib.auth.models import User
 
-# Create your models here.
-# 
+STATUS_COOKING = 1
+STATUS_COOLING_DOWN = 2
+STATUS_READY_FOR_SHIPPING = 3
+
+STATUS_CHOICES = (
+	(STATUS_COOKING, 'Cooking'),
+	(STATUS_COOLING_DOWN, 'Cool Down'),
+	(STATUS_READY_FOR_SHIPPING, 'Ready for shipping')
+)
+
+PRESERVE_OPBEVARES_TOERT = 1
+PRESERVE_SAETTES_PAA_KOEL = 2
+PRESERVE_FRYSES_NED = 3
+
+PRESERVE_CHOICES = (
+	(PRESERVE_OPBEVARES_TOERT, 'Opbevares toert'),
+	(PRESERVE_SAETTES_PAA_KOEL, 'Saettes paa koel'),
+	(PRESERVE_FRYSES_NED, 'Fryses ned')
+)
+ 
 @python_2_unicode_compatible
 class Dish(TimeStampedModel):
 	name = models.CharField(_('name dish'), max_length=100)
 	# lot_number = models.CharField(_('lot number'), max_length=50)
 	team = models.ForeignKey(Team)
-	start = models.DateTimeField(_('start time'))
-	ex_finish = models.DateTimeField(_('Expected finish time'))
+	start = models.DateTimeField('start tidspunkt', default=datetime.datetime.now)
+	ex_finish = models.DateTimeField('Forventet klar', blank=True, null=True)
+	weight = models.IntegerField(_('vaegt'), blank=True, null=True)
+	production_date = models.DateField('produceret den', default=datetime.date.today)
+	status = models.IntegerField(_('Status'), choices=STATUS_CHOICES, default=1)
+	expiration_date = models.DateField('Udloebsdato', blank=True, null=True)
+	preserve = models.IntegerField('Opbevaring', blank=True, null=True)
+	shipping_form = models.TextField('Form', blank=True, null=True)
+	alergies = models.TextField('Allergener', blank=True, null=True)
 	created_by = models.ForeignKey(User)
 
 	class Meta:

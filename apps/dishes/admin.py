@@ -8,9 +8,11 @@ class IngredientInline(admin.TabularInline):
 	extra = 1
 	classes = ('collapse open',)
 
+
 class DishAdmin(admin.ModelAdmin):
 	inlines = [IngredientInline,]
 	search_fields = ['name',]
+	fields = ('name', 'team', ('start', 'ex_finish'), ('status', 'weight', 'preserve'), ('alergies', 'shipping_form'), 'created_by')
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		if db_field.name == 'created_by':

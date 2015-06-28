@@ -22,8 +22,6 @@ def signin(request, form_class=None,
 			user = authenticate(username = username,
 				                password = password)
 
-			print "User: ", user.id 
-
 			if user.is_active:
 				login(request, user)
 				return redirect(reverse('index'))

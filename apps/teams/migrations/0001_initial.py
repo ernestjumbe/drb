@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=50, verbose_name='name')),
             ],
             options={
-                'abstract': False,
+                'verbose_name': 'team leader',
+                'verbose_name_plural': 'team leaders',
             },
         ),
     ]

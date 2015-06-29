@@ -1,4 +1,5 @@
 from django.db import models
+import random
 import datetime
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -26,11 +27,27 @@ PRESERVE_CHOICES = (
 	(PRESERVE_SAETTES_PAA_KOEL, 'Saettes paa koel'),
 	(PRESERVE_FRYSES_NED, 'Fryses ned')
 )
+
+def get_year():
+	year = datetime.datetime.now().strftime('%y')
+	return year
+
+def create_lot_number():
+	sep = "-"
+	ran_num = random.randint(0,9999)
+	ran_num = str(ran_num).zfill(4)
+	seq = ("x", ran_num, str(get_year()))
+	lot = sep.join(seq)
+	if not Dish.objects.filter(lotnumber=lot).exists():
+		return lot
+	else:
+		print lot
+		create_lot_number()
  
 @python_2_unicode_compatible
 class Dish(TimeStampedModel):
 	name = models.CharField(_('name dish'), max_length=100)
-	# lot_number = models.CharField(_('lot number'), max_length=50)
+	lotnumber = models.CharField(_('Lot number'), max_length=9, editable=False, blank=True, null=True, unique=True)
 	team = models.ForeignKey(Team)
 	start = models.DateTimeField('start tidspunkt', default=datetime.datetime.now)
 	ex_finish = models.DateTimeField('Forventet klar', blank=True, null=True)
@@ -54,16 +71,22 @@ class Dish(TimeStampedModel):
 	def get_absolute_url(self):
 		return('dish_detail', (), {'pk': self.pk})
 
+	def save(self, *args, **kwargs):
+		if self.pk is None:
+			self.lotnumber = create_lot_number()
+		super(Dish, self).save()
+
 @python_2_unicode_compatible
 class Ingredient(TimeStampedModel):
 	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
 	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'))
 	dish = models.ForeignKey(Dish)
-	product = models.ForeignKey(Product, limit_choices_to={'product_type': 1})
+	product = models.ForeignKey(Product, to_field='lotnumber')
 
 	def __str__(self):
 		return self.name
+
 
 	def __init__(self, *args, **kwargs):
 		super(Ingredient, self).__init__(*args, **kwargs)
@@ -75,6 +98,7 @@ class Ingredient(TimeStampedModel):
 			p.current_weight = p.current_weight - self.weight_used
 			p.save()
 			self.name = p.name
+			self.lotnumber = create_lot_number()
 		else:
 			p = Product.objects.get(pk=self.product.pk)
 			p.current_weight = p.current_weight + (self.og_weight_used - self.weight_used)

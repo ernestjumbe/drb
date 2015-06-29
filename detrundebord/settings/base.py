@@ -66,8 +66,9 @@ INSTALLED_APPS = (
     #'registration',
     'teams',
     'dishes',
+    'shipments',
     'rest_framework',
-    'core'
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (

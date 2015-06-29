@@ -46,7 +46,7 @@ def _migrate():
 def backup():
 	local('pip freeze > requirements.txt')
 	local('git pull')
-	local('git add .')
+	local('git add -A')
 	print("Enter your commit message:")
 	comment = raw_input()
 	local('git commit -m "%s"' % comment)
@@ -63,8 +63,7 @@ def testgunicorn():
 def _pack():
 	with cd(ROOT_PATH):
 		if not file_exists('latest.zip'):
-			#local('rm latest.zip')
-			pass
+			local('rm latest.zip')
 
 	local('git archive --format zip -o latest.zip HEAD')
 

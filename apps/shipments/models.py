@@ -18,15 +18,14 @@ class Shipment(TimeStampedModel):
 	def __str__(self):
 		return self.destination
 
-@python_2_unicode_compatible
+
 class Batch(models.Model):
 	batch = models.ForeignKey(Dish, to_field='lotnumber')
 	shipment = models.ForeignKey(Shipment)
 	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2)
 	qty = models.IntegerField('Antal', blank=True, null=True)
 
-	def __str__(self):
-		return self.batch
+	
 
 	def __init__(self, *args, **kwargs):
 		super(Batch, self).__init__(*args, **kwargs)

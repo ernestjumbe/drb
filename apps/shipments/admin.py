@@ -10,5 +10,6 @@ class BatchInline(admin.TabularInline):
 class ShipmentAdmin(admin.ModelAdmin):
 	inlines = [BatchInline]
 	search_fields = ['destination']
+	list_display = ('id',)
 
 admin.site.register(Shipment, ShipmentAdmin)

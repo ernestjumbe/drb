@@ -71,9 +71,9 @@ def _install_gunicorn():
 	with cd('/opt/drbenv/detrundebord'), prefix(venv):
 		sudo("pip install gunicorn")
 
-def _install_gunicorn():
-	with cd('/opt/drbenv/detrundebord'), prefix(venv):
-		sudo("newrelic-admin generate-config 88ce58872e03a1ac6836805effa976883133ee4a newrelic.ini")
+# def _install_gunicorn():
+# 	with cd('/opt/drbenv/detrundebord'), prefix(venv):
+# 		sudo("newrelic-admin generate-config 88ce58872e03a1ac6836805effa976883133ee4a newrelic.ini")
 
 def _collectstatic():
 	_djangoManage("collectstatic --noinput")
@@ -152,11 +152,11 @@ def pdeploy():
 	restart()
 
 def cleanup():
-	sudo('rm -rf /opt/drbenv/detrundebord/')
+	#sudo('rm -rf /opt/drbenv/detrundebord/')
 	sudo('rm -rf /opt/drbenv/')
 	sudo('rm -rf /etc/supervisor/conf.d/gunicorn.conf')
 	sudo('rm -rf /opt/drbenv/gunicorn_config.py')
-	_rmTemp()
+	#_rmTemp()
 
 def remote_uname():
 	sudo('uname -a')

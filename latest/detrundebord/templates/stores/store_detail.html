@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>{{ s.list_number }}</h1>
+	<h2>{{ s.name }}</h2>
+	<p>
+		<strong>Company Name: </strong> {{ s.company_name }} <br>
+		<strong>Contact name:</strong> {{ s.contact_fname }} {{ s.contact_lname }} <br>
+		<strong>Contact email:</strong> {{ s.contact_email }} <br>
+		<strong>Company Address:</strong> <br>
+		{{ s.company_adress }} <br>
+		{{ s.company_town }} <br>
+		{{ s.company_postcode }} <br>
+		{{ s.company_country }} <br>
+		<strong>Camp:</strong> {{ s.camp }}, {{ s.inner_camp }}
+	</p>
+	<p>
+		<strong>Other Drinks: </strong> <br>
+		{{ s.other_drinks }}
+	</p>
+	<p>
+		<strong>Taxable Drinks: </strong> <br>
+		{{ s.taxable_drinks }}
+	</p>
+
+	<p>
+		<strong>Assortment: </strong> <br>
+		{{ s.assortment }}
+	</p>
+{% endblock content %}	

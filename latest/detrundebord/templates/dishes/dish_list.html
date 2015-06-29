@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-xs-6">
+			<h1>Dishes</h1>
+		</div>
+		<div class="col-xs-6">
+			<!--<a href="{% url 'create_dish' %}" class="btn btn-primary pull-right" role="button">Create Dish</a>-->
+		</div>
+	</div>
+	<table class="table table-bordered">
+		<thead>
+			<th>Lot Number</th>
+			<th>Name</th>
+			<th>Production Date</th>
+			<th>Expiry Date</th>
+		</thead>
+		<tbody>
+			{% for d in dishes %}
+				<tr>
+					<th scope="row"><a href="{{ d.get_absolute_url }}">{{ d.id }}</a></th>
+					<td><a href="{{ d.get_absolute_url }}">{{ d.name }}</a></td>
+					<td>{{ d.production_date }}</td>
+					<td>{{ d.expiry_date }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if is_paginated %}
+	<ul class="pagination pagination-sm">
+		{% if page_obj.has_previous %}
+		<li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+		{% endif %}
+		{% for i in page_obj.paginator.page_range %}
+		
+		<li {% ifequal i page_obj.number %}class="active"{% endifequal %}>
+			<a href="?page={{i}}">
+			{{i}}
+			</a>
+		</li>
+		
+		{% endfor %}
+		
+		{% if page_obj.has_next %}
+		<li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+		{% endif %}
+	</ul>
+	{% endif %}
+{% endblock content %}

@@ -18,7 +18,7 @@ class ProductListView(LoginRequiredMixin, ListView):
 	paginate_by = 50
 
 	def get_queryset(self):
-		return Product.objects.all().order_by('-date_received')
+		return Product.objects.all().order_by('-created')
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
 	model = Product

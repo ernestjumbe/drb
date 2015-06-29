@@ -100,12 +100,26 @@ class Product(TimeStampedModel):
 	store = models.ForeignKey(Store)
 	created_by = models.ForeignKey(User)
 
+	class Meta:
+		ordering = ['created']
+
 	def __str__(self):
 		return self.name
 
 	@models.permalink
 	def get_absolute_url(self):
 		return('product_detail', (), {'pk': self.pk})
+
+	def print_tag(self):
+		return (u'<strong>Lot Number:</strong> %s' \
+			     '<br><strong>Item:</strong> %s <br>' \
+			     '<strong>Expiry date:</strong> %r' % \
+			     (self.lotnumber, \
+			     self.name, \
+			     self.expiry_date.strftime('%d/%m/%y')))
+
+	print_tag.short_description = 'Label'
+	print_tag.allow_tags=True
 
 	def __init__(self, *args, **kwargs):
 		super(Product, self).__init__(*args, **kwargs)

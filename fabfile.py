@@ -63,7 +63,8 @@ def testgunicorn():
 def _pack():
 	with cd(ROOT_PATH):
 		if not file_exists('latest.zip'):
-			local('rm latest.zip')
+			#local('rm latest.zip')
+			pass
 
 	local('git archive --format zip -o latest.zip HEAD')
 

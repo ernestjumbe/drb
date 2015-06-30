@@ -81,7 +81,7 @@ class Dish(TimeStampedModel):
 		else:
 			expr_date = '-----'
 		return (u'<div id="printable" onclick="selectText(\'printable\')" style="width: 230px, font-size: 11px, font-weight: normal">' \
-				 '<span>Det Runde Bord - Stope Spild Af Mad - Roskilde Festival 2015</span> <br>' \
+				 '' \
 			     '<strong>Lot Number:</strong> %s' \
 			     '<br><strong>Item:</strong> %s <br>' \
 			     '<strong>Prod date:</strong> %s <br>' \

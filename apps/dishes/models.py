@@ -80,16 +80,18 @@ class Dish(TimeStampedModel):
 			expr_date = self.expiration_date
 		else:
 			expr_date = '-----'
-		return (u'<div id="printable" onclick="selectText(\'printable\')"">' \
+		return (u'<div id="printable" onclick="selectText(\'printable\')" style="width: 250px">' \
 			     '<strong>Lot Number:</strong> %s' \
 			     '<br><strong>Item:</strong> %s <br>' \
 			     '<strong>Prod date:</strong> %s <br>' \
-			     '<strong>Expiry date:</strong> %s' \
+			     '<strong>Expiry date:</strong> %s <br>' \
+			     '<strong>Allergener:</strong> %s' \
 			     '</div>' % \
 			     (self.lotnumber, \
 			     self.name, \
 			     prod_date, \
-			     expr_date))
+			     expr_date, \
+			     self.alergies))
 
 	print_tag.short_description = 'Label'
 	print_tag.allow_tags=True

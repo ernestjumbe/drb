@@ -15,6 +15,10 @@ class Shipment(TimeStampedModel):
 	departure = models.DateTimeField('Afgangstidspunkt', default=datetime.datetime.now)
 	user = models.ForeignKey(User)
 
+	class Meat:
+		verbose_name='Delivery'
+		verbose_name_plural='Deliveries'
+
 	def __str__(self):
 		return self.destination
 

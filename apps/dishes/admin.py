@@ -12,7 +12,7 @@ class IngredientInline(admin.TabularInline):
 class DishAdmin(admin.ModelAdmin):
 	inlines = [IngredientInline,]
 	search_fields = ['name',]
-	fields = ('name', 'team', ('start', 'ex_finish'), ('status', 'weight', 'preserve'), ('alergies', 'shipping_form'), 'created_by')
+	fields = ('name', 'team', ('start', 'ex_finish'), ('status', 'weight', 'preserve', 'qty'), ('alergies', 'shipping_form'), 'created_by')
 	list_display = ('lotnumber', 'name', 'team', 'status', 'production_date', 'expiration_date')
 	list_filter = ['production_date', 'status']
 

@@ -8,5 +8,4 @@ function selectText(containerid) {
             range.selectNode(document.getElementById(containerid));
             window.getSelection().addRange(range);
         }
-        window.print();
     }

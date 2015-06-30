@@ -10,10 +10,12 @@ from django.contrib.auth.models import User
 
 STATUS_COLLECTED = 1
 STATUS_IN_HOUSE = 2
+STATUS_DISCARDED = 3
 
 STATUS_CHOICES = (
 	(STATUS_COLLECTED, _('Collected')),
 	(STATUS_IN_HOUSE, _('In House')),
+	(STATUS_DISCARDED, _('Discarded')),
 )
 
 TYPE_INGREDIENT = 1
@@ -37,10 +39,10 @@ PRESERVE_CHOICES = (
 NULL = 0
 KOLERUM_2 = 1
 KOLERUM_3 = 2
-KOLE_CONTAINER_4 = 3
-KOLE_CONTAINER_5 = 4
-FRYSE_CONTAINER_6 = 5
-FRYSE_CONTAINER_7 = 6
+UDGAAENDE_KOEL = 3
+HURTIG_NEDKOEL = 4
+UDGAAENDE_FRYS = 5
+INDGAAENDE_FRYS = 6
 CITY_CENTER_EAST = 7
 APOLLO_SYD = 8
 TRANSIT = 9
@@ -51,10 +53,10 @@ POSITION_CHOICES = (
 	(NULL, '--------'),
 	(KOLERUM_2, u'Kolerum 2'),
 	(KOLERUM_3, u'Kolerum 3'),
-	(KOLE_CONTAINER_4, u'Kole Container 4'),
-	(KOLE_CONTAINER_5, u'Kole Container 5'),
-	(FRYSE_CONTAINER_6, 'Fryse Container 6'),
-	(FRYSE_CONTAINER_7, 'Fryse Container 7'),
+	(KOLE_CONTAINER_4, u'Udgaaende Koel'),
+	(KOLE_CONTAINER_5, u'Hurtig Nedkoel'),
+	(FRYSE_CONTAINER_6, 'Udgaaende Frys'),
+	(FRYSE_CONTAINER_7, 'Indgaaende Frys'),
 	(CITY_CENTER_EAST, 'City Center East'),
 	(APOLLO_SYD, 'Apollo Syd'),
 	(TRANSIT, 'Transit'),

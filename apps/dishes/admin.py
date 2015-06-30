@@ -23,8 +23,13 @@ class DishAdmin(admin.ModelAdmin):
 	
 	def get_readonly_fields(self, request, obj=None):
 		if obj is not None:
-			return self.readonly_fields + ('created_by',)
+			return self.readonly_fields + ('created_by', 'created', 'modified','print_tag')
 		return self.readonly_fields
+
+	def get_fields(self, request, obj=None):
+		if obj is not None:
+			return self.fields + (('created', 'modified'), 'print_tag')
+		return self.fields
 	
 	def add_view(self, request, form_url="", extra_context=None):
 		data = request.GET.copy()

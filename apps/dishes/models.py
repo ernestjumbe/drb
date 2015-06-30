@@ -71,6 +71,29 @@ class Dish(TimeStampedModel):
 	def get_absolute_url(self):
 		return('dish_detail', (), {'pk': self.pk})
 
+	def print_tag(self):
+		if self.production_date:
+			prod_date = self.production_date
+		else:
+			prod_date = '-----'
+		if self.expiration_date:
+			expr_date = self.expiration_date
+		else:
+			expr_date = '-----'
+		return (u'<div class="label">' \
+			     '<strong>Lot Number:</strong> %s' \
+			     '<br><strong>Item:</strong> %s <br>' \
+			     '<strong>Prod date:</strong> %s <br>' \
+			     '<strong>Expiry date:</strong> %s' \
+			     '</div>' % \
+			     (self.lotnumber, \
+			     self.name, \
+			     prod_date, \
+			     expr_date))
+
+	print_tag.short_description = 'Label'
+	print_tag.allow_tags=True
+
 	def save(self, *args, **kwargs):
 		if self.pk is None:
 			self.lotnumber = create_lot_number()

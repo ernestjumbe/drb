@@ -9,6 +9,11 @@ class ProductAdmin(admin.ModelAdmin):
 	readonly_fields=('current_weight', 'initial_weight', 'created', 'modified')
 	fields = (('qty', 'i_type', 'name', 'weight_per_item'), ('store', 'initial_weight', 'current_weight'), ('production_date', 'date_received', 'expiry_date'), ('status', 'product_type', 'preserve', 'position'), 'description', 'created_by')
 
+	class Media:
+		from django.conf import settings
+		static_url = getattr(settings, 'STATIC_URL', '/static')
+		js = [static_url+'js/selectandprint.js',]
+
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		if db_field.name == 'created_by':
 			kwargs['queryset'] = User.objects.filter(username=request.user.username)

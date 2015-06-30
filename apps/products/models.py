@@ -119,7 +119,7 @@ class Product(TimeStampedModel):
 			expr_date = self.expiry_date
 		else:
 			expr_date = '-----'
-		return (u'<div class="label">' \
+		return (u'<div id="printable" onclick="selectText(\'printable\')"">' \
 			     '<strong>Lot Number:</strong> %s' \
 			     '<br><strong>Item:</strong> %s <br>' \
 			     '<strong>Prod date:</strong> %s <br>' \

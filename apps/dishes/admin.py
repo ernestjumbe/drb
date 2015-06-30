@@ -16,6 +16,11 @@ class DishAdmin(admin.ModelAdmin):
 	list_display = ('lotnumber', 'name', 'team', 'status', 'production_date', 'expiration_date')
 	list_filter = ['production_date', 'status']
 
+	class Media:
+		from django.conf import settings
+		static_url = getattr(settings, 'STATIC_URL', '/static')
+		js = [static_url+'js/selectandprint.js',]
+
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		if db_field.name == 'created_by':
 			kwargs['queryset'] = User.objects.filter(username=request.user.username)

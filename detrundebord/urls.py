@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^products/', include('products.urls')),
     url(r'^dishes/', include('dishes.urls')),
     url(r'^stores/', include('stores.urls')),
+    url(r'^shipment/', include('shipments.urls')),
 
     url(r'^login/$',
            signin,

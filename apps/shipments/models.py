@@ -18,6 +18,10 @@ class Shipment(TimeStampedModel):
 	def __str__(self):
 		return self.destination
 
+	@models.permalink
+	def get_absolute_url(self):
+		return('shipment_detail', (), {'pk': self.pk})
+
 
 class Batch(models.Model):
 	batch = models.ForeignKey(Dish, to_field='lotnumber')

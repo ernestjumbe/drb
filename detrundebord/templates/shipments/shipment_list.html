@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-xs-6">
+			<h1>Shipments</h1>
+		</div>
+		<div class="col-xs-6">
+			<a href="" class="btn btn-primary pull-right">
+				Create Shipment
+			</a>
+		</div>
+	</div>
+	<table class="table bordered-table">
+		<thead>
+			<th>Destination</th>
+			<th>Driver</th>
+			<th>Departure</th>
+		</thead>
+		<tbody>
+			{% for s in shipments %}
+				<tr>
+					<td>
+						<a href="{{ s.get_absolute_url }}">
+							{{ s.destination }}
+						</a>
+					</td>
+					<td>
+						{{ s.driver }}
+					</td>
+					<td>{{ s.departure }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock content %}

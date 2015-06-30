@@ -111,23 +111,22 @@ class Product(TimeStampedModel):
 		return('product_detail', (), {'pk': self.pk})
 
 	def print_tag(self):
-		if self.production_date:
-			prod_date = self.production_date
-		else:
-			prod_date = '-----'
+		# if self.production_date:
+		# 	prod_date = self.production_date
+		# else:
+		# 	prod_date = '-----'
 		if self.expiry_date:
 			expr_date = self.expiry_date
 		else:
 			expr_date = '-----'
-		return (u'<div id="printable" onclick="selectText(\'printable\')"">' \
+		return (u'<div id="printable" onclick="selectText(\'printable\')" style="width: 230px; font-size: 11px; font-weight: bold; line-height: 13px">' \
+				 '<span>Det Runde Bord - Stop Spild Af Mad - Roskilde Festival 2015</span> <br>' \
 			     '<strong>Lot Number:</strong> %s' \
 			     '<br><strong>Item:</strong> %s <br>' \
-			     '<strong>Prod date:</strong> %s <br>' \
 			     '<strong>Expiry date:</strong> %s' \
 			     '</div>' % \
 			     (self.lotnumber, \
 			     self.name, \
-			     prod_date, \
 			     expr_date))
 
 	print_tag.short_description = 'Label'

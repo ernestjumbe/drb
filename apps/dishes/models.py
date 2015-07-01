@@ -106,7 +106,7 @@ class Dish(TimeStampedModel):
 class Ingredient(TimeStampedModel):
 	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
-	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'))
+	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
 	dish = models.ForeignKey(Dish)
 	product = models.ForeignKey(Product, to_field='lotnumber')
 

@@ -31,7 +31,7 @@ class Shipment(TimeStampedModel):
 class Batch(models.Model):
 	batch = models.ForeignKey(Dish, to_field='lotnumber')
 	shipment = models.ForeignKey(Shipment)
-	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2)
+	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2, blank=True, null=True)
 	qty = models.IntegerField('Antal', blank=True, null=True)
 
 	
@@ -61,7 +61,7 @@ class Batch(models.Model):
 class Ingredient(TimeStampedModel):
 	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
-	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'))
+	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
 	shipment = models.ForeignKey(Shipment)
 	product = models.ForeignKey(Product, to_field='lotnumber', related_name='ship_ingredient')
 

@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'shipments',
     'rest_framework',
     'core',
+    'pre_dishes',
 )
 
 MIDDLEWARE_CLASSES = (

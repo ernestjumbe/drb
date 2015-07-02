@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from core.models import TimeStampedModel
 from products.models import Product
 from teams.models import Team
-from pre_dishes.models import PreDish
 from django.contrib.auth.models import User
 
 STATUS_COOKING = 1
@@ -37,16 +36,16 @@ def create_lot_number():
 	sep = "-"
 	ran_num = random.randint(0,9999)
 	ran_num = str(ran_num).zfill(4)
-	seq = ("x", ran_num, str(get_year()))
+	seq = ("p", ran_num, str(get_year()))
 	lot = sep.join(seq)
-	if not Dish.objects.filter(lotnumber=lot).exists():
+	if not PreDish.objects.filter(lotnumber=lot).exists():
 		return lot
 	else:
 		print lot
 		create_lot_number()
  
 @python_2_unicode_compatible
-class Dish(TimeStampedModel):
+class PreDish(TimeStampedModel):
 	name = models.CharField(_('name dish'), max_length=100)
 	lotnumber = models.CharField(_('Lot number'), max_length=9, editable=False, blank=True, null=True, unique=True)
 	team = models.ForeignKey(Team)
@@ -64,52 +63,24 @@ class Dish(TimeStampedModel):
 	created_by = models.ForeignKey(User)
 
 	class Meta:
-		verbose_name='dish'
-		verbose_name_plural='dishes'
+		verbose_name='pre dish'
+		verbose_name_plural='pre dishes'
 
 	def __str__(self):
 		return self.name
-
-	@models.permalink
-	def get_absolute_url(self):
-		return('dish_detail', (), {'pk': self.pk})
-
-	def print_tag(self):
-		# if self.production_date:
-		# 	prod_date = self.production_date
-		# else:
-		# 	prod_date = '-----'
-		if self.expiration_date:
-			expr_date = self.expiration_date
-		else:
-			expr_date = '-----'
-		return (u'<div id="printable" onclick="selectText(\'printable\')" style="width: 230px; font-size: 11px; font-weight: bold; line-height: 13px">' \
-				 '<span>Det Runde Bord - Stop Spild Af Mad - Roskilde Festival 2015</span> <br>' \
-			     'Lot Number: %s' \
-			     '<br>Item: %s <br>' \
-			     'Expiry date: %s <br>' \
-			     'Allergener: %s' \
-			     '</div>' % \
-			     (self.lotnumber, \
-			     self.name, \
-			     expr_date, \
-			     self.alergies))
-
-	print_tag.short_description = 'Label'
-	print_tag.allow_tags=True
-
+	
 	def save(self, *args, **kwargs):
 		if self.pk is None:
 			self.lotnumber = create_lot_number()
-		super(Dish, self).save()
+		super(PreDish, self).save()
 
 @python_2_unicode_compatible
 class Ingredient(TimeStampedModel):
 	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
 	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
-	dish = models.ForeignKey(Dish)
-	product = models.ForeignKey(Product, to_field='lotnumber', related_name='dish_ingredient')
+	predish = models.ForeignKey(PreDish)
+	product = models.ForeignKey(Product, to_field='lotnumber', related_name='predish_ingredient')
 
 	def __str__(self):
 		return self.name
@@ -119,38 +90,21 @@ class Ingredient(TimeStampedModel):
 	# 	super(Ingredient, self).__init__(*args, **kwargs)
 	# 	self.og_weight_used = self.weight_used
 
-	def save(self, *args, **kwargs):
-		if self.pk is None:
-			p = Product.objects.get(pk=self.product.pk)
-			#p.current_weight = p.current_weight - self.weight_used
-			p.save()
-			self.name = p.name
-		# else:
-		# 	p = Product.objects.get(pk=self.product.pk)
-		# 	p.current_weight = p.current_weight + (self.og_weight_used - self.weight_used)
-		# 	p.save()
-		super(Ingredient, self).save()
+	# def save(self, *args, **kwargs):
+	# 	if self.pk is None:
+	# 		p = Product.objects.get(pk=self.product.pk)
+	# 		p.current_weight = p.current_weight - self.weight_used
+	# 		p.save()
+	# 		self.name = p.name
+	# 		self.lotnumber = create_lot_number()
+	# 	else:
+	# 		p = Product.objects.get(pk=self.product.pk)
+	# 		p.current_weight = p.current_weight + (self.og_weight_used - self.weight_used)
+	# 		p.save()
+	# 	super(Ingredient, self).save()
 
 	# def delete(self, *args, **kwargs):
 	# 	p = Product.objects.get(pk=self.product.pk)
 	# 	p.current_weight = p.current_weight + self.og_weight_used
 	# 	p.save()
 	# 	super(Ingredient, self).delete()
-
-@python_2_unicode_compatible
-class PreDishIngredient(TimeStampedModel):
-	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
-	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
-	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
-	dish = models.ForeignKey(Dish)
-	predish = models.ForeignKey(PreDish, to_field='lotnumber')
-
-	def __str__(self):
-		return self.name
-
-	def save(self, *args, **kwargs):
-		if self.pk is None:
-			pd = PreDish.objects.get(pk=self.predish.pk)
-			pd.save()
-			self.name = pd.name
-		super(PreDish, self).save()

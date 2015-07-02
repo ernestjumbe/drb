@@ -31,7 +31,7 @@ class Shipment(TimeStampedModel):
 class Batch(models.Model):
 	batch = models.ForeignKey(Dish, to_field='lotnumber')
 	shipment = models.ForeignKey(Shipment)
-	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2, blank=True, null=True)
+	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2, blank=True, null=True, default=0.0)
 	qty = models.IntegerField('Antal', blank=True, null=True)
 
 	

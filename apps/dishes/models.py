@@ -37,7 +37,7 @@ def create_lot_number():
 	sep = "-"
 	ran_num = random.randint(0,9999)
 	ran_num = str(ran_num).zfill(4)
-	seq = ("x", ran_num, str(get_year()))
+	seq = ("d", ran_num, str(get_year()))
 	lot = sep.join(seq)
 	if not Dish.objects.filter(lotnumber=lot).exists():
 		return lot

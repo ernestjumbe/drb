@@ -114,25 +114,25 @@ class Ingredient(TimeStampedModel):
 		return self.name
 
 
-	def __init__(self, *args, **kwargs):
-		super(Ingredient, self).__init__(*args, **kwargs)
-		self.og_weight_used = self.weight_used
+	# def __init__(self, *args, **kwargs):
+	# 	super(Ingredient, self).__init__(*args, **kwargs)
+	# 	self.og_weight_used = self.weight_used
 
-	def save(self, *args, **kwargs):
-		if self.pk is None:
-			p = Product.objects.get(pk=self.product.pk)
-			p.current_weight = p.current_weight - self.weight_used
-			p.save()
-			self.name = p.name
-			self.lotnumber = create_lot_number()
-		else:
-			p = Product.objects.get(pk=self.product.pk)
-			p.current_weight = p.current_weight + (self.og_weight_used - self.weight_used)
-			p.save()
-		super(Ingredient, self).save()
+	# def save(self, *args, **kwargs):
+	# 	if self.pk is None:
+	# 		p = Product.objects.get(pk=self.product.pk)
+	# 		p.current_weight = p.current_weight - self.weight_used
+	# 		p.save()
+	# 		self.name = p.name
+	# 		self.lotnumber = create_lot_number()
+	# 	else:
+	# 		p = Product.objects.get(pk=self.product.pk)
+	# 		p.current_weight = p.current_weight + (self.og_weight_used - self.weight_used)
+	# 		p.save()
+	# 	super(Ingredient, self).save()
 
-	def delete(self, *args, **kwargs):
-		p = Product.objects.get(pk=self.product.pk)
-		p.current_weight = p.current_weight + self.og_weight_used
-		p.save()
-		super(Ingredient, self).delete()
+	# def delete(self, *args, **kwargs):
+	# 	p = Product.objects.get(pk=self.product.pk)
+	# 	p.current_weight = p.current_weight + self.og_weight_used
+	# 	p.save()
+	# 	super(Ingredient, self).delete()

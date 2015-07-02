@@ -143,7 +143,7 @@ class PreDishIngredient(TimeStampedModel):
 	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
 	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
 	dish = models.ForeignKey(Dish)
-	predish = models.ForeignKey(PreDish, to_field='lotnumber')
+	predish = models.ForeignKey(PreDish, to_field='lotnumber', related_name='dish_predish')
 
 	def __str__(self):
 		return self.name
@@ -153,4 +153,4 @@ class PreDishIngredient(TimeStampedModel):
 			pd = PreDish.objects.get(pk=self.predish.pk)
 			pd.save()
 			self.name = pd.name
-		super(PreDish, self).save()
+		super(PreDishIngredient, self).save()

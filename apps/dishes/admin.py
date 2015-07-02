@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Dish, Ingredient, PreDish
+from .models import Dish, Ingredient, PreDishIngredient
 
 class IngredientInline(admin.TabularInline):
 	model = Ingredient
@@ -9,14 +9,14 @@ class IngredientInline(admin.TabularInline):
 	classes = ('collapse open',)
 
 class PreDishInline(admin.TabularInline):
-	model = PreDish
+	model = PreDishIngredient
 	raw_id_fields = ("predish",)
 	extra = 1
 	classes = ('collapse open',)
 
 
 class DishAdmin(admin.ModelAdmin):
-	inlines = [IngredientInline]
+	inlines = [IngredientInline, PreDishInline]
 	search_fields = ['name',]
 	fields = ('name', 'team', ('start', 'ex_finish'), ('status', 'weight', 'preserve', 'qty'), ('alergies', 'shipping_form'), 'created_by')
 	list_display = ('lotnumber', 'name', 'team', 'status', 'production_date', 'expiration_date')

@@ -7,6 +7,7 @@ class IngredientInline(admin.TabularInline):
 	raw_id_fields = ("product",)
 	extra = 1
 	classes = ('collapse open',)
+	fields = ('product', 'name', 'weight_used', 'qty_used')
 
 
 class PreDishAdmin(admin.ModelAdmin):

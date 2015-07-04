@@ -34,6 +34,10 @@ class Batch(models.Model):
 	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2, blank=True, null=True, default=0.0)
 	qty = models.IntegerField('Antal', blank=True, null=True)
 
+	class Meta:
+		verbose_name=_('Dish')
+		verbose_name_plural=_('Dishes')
+
 	
 
 	def __init__(self, *args, **kwargs):

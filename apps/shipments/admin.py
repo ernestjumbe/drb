@@ -7,12 +7,14 @@ class BatchInline(admin.TabularInline):
 	raw_id_fields = ("batch",)
 	extra = 1
 	classes = ('collapse open',)
+	fields = ('batch', 'weight', 'qty')
 
 class IngredientInline(admin.TabularInline):
 	model = Ingredient
 	raw_id_fields = ("product",)
 	extra = 1
 	classes = ('collapse open',)
+	fields = ('product', 'name', 'weight_used', 'qty_used')
 
 class ShipmentAdmin(admin.ModelAdmin):
 	inlines = [BatchInline, IngredientInline]

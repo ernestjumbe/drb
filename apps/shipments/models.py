@@ -47,16 +47,16 @@ class Batch(models.Model):
 		super(Batch, self).__init__(*args, **kwargs)
 		self.og_weight = self.weight
 
-	def save(self, *args, **kwargs):
-		if self.pk is None:
-			d = Dish.objects.get(pk=self.batch.pk)
-			d.weight = d.weight - self.weight
-			d.save()
-		else:
-			d = Dish.objects.get(pk=self.batch.pk)
-			d.weight = d.weight + (self.og_weight - self.weight)
-			d.save()
-		super(Batch, self).save()
+	# def save(self, *args, **kwargs):
+	# 	if self.pk is None:
+	# 		d = Dish.objects.get(pk=self.batch.pk)
+	# 		d.weight = d.weight - self.weight
+	# 		d.save()
+	# 	else:
+	# 		d = Dish.objects.get(pk=self.batch.pk)
+	# 		d.weight = d.weight + (self.og_weight - self.weight)
+	# 		d.save()
+	# 	super(Batch, self).save()
 
 	def delete(self, *args, **kwargs):
 		d = Dish.objects.get(pk=self.batch.pk)

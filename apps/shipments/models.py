@@ -6,6 +6,7 @@ from products.models import Product
 from core.models import TimeStampedModel
 from dishes.models import Dish
 from django.contrib.auth.models import User
+from pre_dishes.models import PreDish
 
 @python_2_unicode_compatible
 class Shipment(TimeStampedModel):
@@ -30,9 +31,11 @@ class Shipment(TimeStampedModel):
 
 class Batch(models.Model):
 	batch = models.ForeignKey(Dish, to_field='lotnumber')
+	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
 	shipment = models.ForeignKey(Shipment)
 	weight = models.DecimalField('vaegt', max_digits=5, decimal_places=2, blank=True, null=True, default=0.0)
 	qty = models.IntegerField('Antal', blank=True, null=True)
+	description = models.TextField(_('description'), blank=True, null=True)
 
 	class Meta:
 		verbose_name=_('Dish')
@@ -68,6 +71,7 @@ class Ingredient(TimeStampedModel):
 	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
 	shipment = models.ForeignKey(Shipment)
 	product = models.ForeignKey(Product, to_field='lotnumber', related_name='ship_ingredient')
+	description = models.TextField(_('description'), blank=True, null=True)
 
 	def __str__(self):
 		return self.name
@@ -95,4 +99,20 @@ class Ingredient(TimeStampedModel):
 	# 	p.current_weight = p.current_weight + self.og_weight_used
 	# 	p.save()
 	# 	super(Ingredient, self).delete()
+
+@python_2_unicode_compatible
+class PreDish(TimeStampedModel):
+	name = models.CharField(_('name'), max_length=100, blank=True, null=True)
+	qty_used = models.IntegerField(_('quantity used'), blank=True, null=True)
+	weight_used = models.DecimalField(_('weight used'), max_digits=5, decimal_places=2, help_text=_('Enter amount in kgs'), blank=True, null=True)
+	shipment = models.ForeignKey(Shipment)
+	predish = models.ForeignKey(PreDish, to_field='lotnumber', related_name='ship_predish')
+	description = models.TextField(_('description'), blank=True, null=True)
+
+	class Meta:
+		verbose_name=_('pre dish')
+		verbose_name_plural=_('pre dishes')
+
+	def __str__(self):
+		return self.name
 

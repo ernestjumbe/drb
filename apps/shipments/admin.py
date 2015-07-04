@@ -1,23 +1,30 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Shipment, Batch, Ingredient
+from .models import Shipment, Batch, Ingredient, PreDish
 
 class BatchInline(admin.TabularInline):
 	model = Batch
 	raw_id_fields = ("batch",)
 	extra = 1
 	classes = ('collapse open',)
-	fields = ('batch', 'weight', 'qty')
+	fields = ('batch', 'name', 'weight', 'qty', 'description')
 
 class IngredientInline(admin.TabularInline):
 	model = Ingredient
 	raw_id_fields = ("product",)
 	extra = 1
 	classes = ('collapse open',)
-	fields = ('product', 'name', 'weight_used', 'qty_used')
+	fields = ('product', 'name', 'weight_used', 'qty_used', 'description')
+
+class PreDishInline(admin.TabularInline):
+	model = PreDish
+	raw_id_fields = ('predish',)
+	extra = 1
+	classes = ('collapse open',)
+	fields = ('predish', 'name', 'weight_used', 'qty_used', 'description')
 
 class ShipmentAdmin(admin.ModelAdmin):
-	inlines = [BatchInline, IngredientInline]
+	inlines = [BatchInline, IngredientInline, PreDishInline]
 	search_fields = ['destination']
 	list_display = ('id', 'destination', 'departure', 'driver')
 	list_display_links = ('destination',)
